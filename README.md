@@ -69,6 +69,10 @@ Coming soon:
 - `dim_products` — product dimension
 - `dim_sellers` — seller dimension
 
+## Lineage Graph
+
+![DAG Lineage](assets/screenshots/dag_lineage.png)
+
 ## Testing
 
 58 tests passing across staging and intermediate layers covering:
