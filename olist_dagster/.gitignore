@@ -1,0 +1,8 @@
+# Dagster temp files
+.tmp_dagster_home_*
+__pycache__/
+*.pyc
+*.egg-info/
+dist/
+build/
+.env
