@@ -176,4 +176,4 @@ dagster dev
 
 ## Author
 
-Himanshu Kara — [LinkedIn](https://linkedin.com/in/himanshukara) · [GitHub](https://github.com/whysokara) · [Medium](https://medium.com/@whysokara)
+Kara — [LinkedIn](https://linkedin.com/in/himanshukara) · [GitHub](https://github.com/whysokara) · [Medium](https://medium.com/@whysokara)
