@@ -27,8 +27,9 @@ models:
         data_tests:
           - not_null
           - accepted_values:
-              values: ['delivered', 'shipped', 'canceled', 'unavailable',
-                       'invoiced', 'processing', 'created', 'approved']
+              arguments:
+                values: ['delivered', 'shipped', 'canceled', 'unavailable',
+                         'invoiced', 'processing', 'created', 'approved']
 
   - name: stg_order_items
     description: "Cleaned order line items"
@@ -56,7 +57,8 @@ models:
         data_tests:
           - not_null
           - accepted_values:
-              values: ['credit_card', 'boleto', 'voucher', 'debit_card', 'not_defined']
+              arguments:
+                values: ['credit_card', 'boleto', 'voucher', 'debit_card', 'not_defined']
       - name: payment_value
         data_tests:
           - not_null
@@ -74,7 +76,8 @@ models:
         data_tests:
           - not_null
           - accepted_values:
-              values: [1, 2, 3, 4, 5]
+              arguments:
+                values: [1, 2, 3, 4, 5]
 
   - name: stg_products
     description: "Cleaned product catalog"

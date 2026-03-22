@@ -16,9 +16,10 @@ models:
         data_tests:
           - not_null
           - accepted_values:
+              arguments:
+                values: ['delivered', 'shipped', 'canceled', 'unavailable',
+                         'invoiced', 'processing', 'created', 'approved']
               severity: warn
-              values: ['delivered', 'shipped', 'canceled', 'unavailable',
-                       'invoiced', 'processing', 'created', 'approved']
       - name: purchased_at
         data_tests:
           - not_null
@@ -49,7 +50,8 @@ models:
         data_tests:
           - not_null
           - accepted_values:
-              values: ['no_orders', 'one_time', 'repeat', 'loyal']
+              arguments:
+                values: ['no_orders', 'one_time', 'repeat', 'loyal']
 
   - name: dim_products
     description: "One row per product with category and sales metrics"
@@ -82,4 +84,5 @@ models:
         data_tests:
           - not_null
           - accepted_values:
-              values: ['bronze', 'silver', 'gold', 'platinum']
+              arguments:
+                values: ['bronze', 'silver', 'gold', 'platinum']
