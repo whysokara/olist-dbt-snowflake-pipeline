@@ -1,0 +1,85 @@
+version: 2
+
+models:
+  - name: fct_orders
+    description: "One row per order with all metrics including payment, delivery and review"
+    columns:
+      - name: order_id
+        description: "Primary key"
+        data_tests:
+          - unique
+          - not_null
+      - name: customer_id
+        data_tests:
+          - not_null
+      - name: order_status
+        data_tests:
+          - not_null
+          - accepted_values:
+              severity: warn
+              values: ['delivered', 'shipped', 'canceled', 'unavailable',
+                       'invoiced', 'processing', 'created', 'approved']
+      - name: purchased_at
+        data_tests:
+          - not_null
+      - name: total_items
+        data_tests:
+          - not_null:
+              severity: warn
+      - name: total_order_value
+        data_tests:
+          - not_null:
+              severity: warn
+
+  - name: dim_customers
+    description: "One row per unique customer with lifetime metrics and segmentation"
+    columns:
+      - name: customer_unique_id
+        description: "Primary key"
+        data_tests:
+          - unique
+          - not_null
+      - name: city
+        data_tests:
+          - not_null
+      - name: state
+        data_tests:
+          - not_null
+      - name: customer_segment
+        data_tests:
+          - not_null
+          - accepted_values:
+              values: ['no_orders', 'one_time', 'repeat', 'loyal']
+
+  - name: dim_products
+    description: "One row per product with category and sales metrics"
+    columns:
+      - name: product_id
+        description: "Primary key"
+        data_tests:
+          - unique
+          - not_null
+      - name: category_name_english
+        data_tests:
+          - not_null:
+              severity: warn
+
+  - name: dim_sellers
+    description: "One row per seller with performance metrics and tier"
+    columns:
+      - name: seller_id
+        description: "Primary key"
+        data_tests:
+          - unique
+          - not_null
+      - name: seller_city
+        data_tests:
+          - not_null
+      - name: seller_state
+        data_tests:
+          - not_null
+      - name: seller_tier
+        data_tests:
+          - not_null
+          - accepted_values:
+              values: ['bronze', 'silver', 'gold', 'platinum']

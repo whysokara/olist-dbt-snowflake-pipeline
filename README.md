@@ -104,4 +104,4 @@ dbt test
 
 ## Author
 
-Himanshu Kara — [LinkedIn](https://linkedin.com/in/himanshukara) · [GitHub](https://github.com/whysokara)
+Kara — [LinkedIn](https://linkedin.com/in/himanshukara) · [GitHub](https://github.com/whysokara)
