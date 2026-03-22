@@ -1,5 +1,14 @@
+{{config(
+    materialized='incremental',
+    unique_key='order_id',
+    incremental_strategy='merge'
+)}}
+
 with orders as (
     select * from {{ ref('int_orders_with_customers') }}
+    {% if is_incremental() %}
+    where purchased_at >= (select max(purchased_at) from {{ this }})
+    {% endif %}
 ),
 
 payments as (
