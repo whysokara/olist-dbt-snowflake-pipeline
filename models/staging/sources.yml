@@ -5,6 +5,10 @@ sources:
     database: OLIST_DB
     schema: RAW
     description: "Raw Olist e-commerce data loaded via Snowflake internal stage"
+    freshness:
+      warn_after: {count: 7, period: day}
+      error_after: {count: 30, period: day}
+    loaded_at_field: null
     tables:
       - name: customers
         description: "Raw customer data from Olist"
@@ -13,14 +17,13 @@ sources:
             data_tests:
               - unique
               - not_null
-      - name: geolocation
-        description: "Raw geolocation data by zip code"
-        columns:
-          - name: geolocation_zip_code_prefix
-            data_tests:
-              - not_null
       - name: orders
         description: "Raw orders with status and timestamps"
+        config:
+          freshness:
+            warn_after: {count: 1, period: day}
+            error_after: {count: 3, period: day}
+          loaded_at_field: order_purchase_timestamp
         columns:
           - name: order_id
             data_tests:
@@ -31,6 +34,10 @@ sources:
               - not_null
       - name: order_items
         description: "Raw order line items with product and seller"
+        freshness:
+          warn_after: {count: 1, period: day}
+          error_after: {count: 3, period: day}
+        loaded_at_field: shipping_limit_date
         columns:
           - name: order_id
             data_tests:
@@ -66,6 +73,12 @@ sources:
           - name: seller_id
             data_tests:
               - unique
+              - not_null
+      - name: geolocation
+        description: "Raw geolocation data by zip code"
+        columns:
+          - name: geolocation_zip_code_prefix
+            data_tests:
               - not_null
       - name: product_category_name_translation
         description: "Portuguese to English category translation"
