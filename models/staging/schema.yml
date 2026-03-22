@@ -1,0 +1,108 @@
+version: 2
+
+models:
+  - name: stg_customers
+    description: "Cleaned customer data"
+    columns:
+      - name: customer_id
+        description: "Primary key"
+        data_tests:
+          - unique
+          - not_null
+      - name: customer_unique_id
+        data_tests:
+          - not_null
+
+  - name: stg_orders
+    description: "Cleaned orders with timestamps"
+    columns:
+      - name: order_id
+        data_tests:
+          - unique
+          - not_null
+      - name: customer_id
+        data_tests:
+          - not_null
+      - name: status
+        data_tests:
+          - not_null
+          - accepted_values:
+              values: ['delivered', 'shipped', 'canceled', 'unavailable',
+                       'invoiced', 'processing', 'created', 'approved']
+
+  - name: stg_order_items
+    description: "Cleaned order line items"
+    columns:
+      - name: order_id
+        data_tests:
+          - not_null
+      - name: product_id
+        data_tests:
+          - not_null
+      - name: seller_id
+        data_tests:
+          - not_null
+      - name: price
+        data_tests:
+          - not_null
+
+  - name: stg_order_payments
+    description: "Cleaned payment data"
+    columns:
+      - name: order_id
+        data_tests:
+          - not_null
+      - name: payment_type
+        data_tests:
+          - not_null
+          - accepted_values:
+              values: ['credit_card', 'boleto', 'voucher', 'debit_card', 'not_defined']
+      - name: payment_value
+        data_tests:
+          - not_null
+
+  - name: stg_order_reviews
+    description: "Cleaned review data"
+    columns:
+      - name: review_id
+        data_tests:
+          - not_null
+      - name: order_id
+        data_tests:
+          - not_null
+      - name: review_score
+        data_tests:
+          - not_null
+          - accepted_values:
+              values: [1, 2, 3, 4, 5]
+
+  - name: stg_products
+    description: "Cleaned product catalog"
+    columns:
+      - name: product_id
+        data_tests:
+          - unique
+          - not_null
+
+  - name: stg_sellers
+    description: "Cleaned seller data"
+    columns:
+      - name: seller_id
+        data_tests:
+          - unique
+          - not_null
+
+  - name: stg_geolocation
+    description: "Cleaned geolocation data"
+    columns:
+      - name: zip_code_prefix
+        data_tests:
+          - not_null
+
+  - name: stg_product_category_translations
+    description: "Portuguese to English category mapping"
+    columns:
+      - name: category_name_portuguese
+        data_tests:
+          - unique
+          - not_null

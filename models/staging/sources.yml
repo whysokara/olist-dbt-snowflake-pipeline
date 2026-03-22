@@ -1,0 +1,76 @@
+version: 2
+
+sources:
+  - name: olist_raw
+    database: OLIST_DB
+    schema: RAW
+    description: "Raw Olist e-commerce data loaded via Snowflake internal stage"
+    tables:
+      - name: customers
+        description: "Raw customer data from Olist"
+        columns:
+          - name: customer_id
+            data_tests:
+              - unique
+              - not_null
+      - name: geolocation
+        description: "Raw geolocation data by zip code"
+        columns:
+          - name: geolocation_zip_code_prefix
+            data_tests:
+              - not_null
+      - name: orders
+        description: "Raw orders with status and timestamps"
+        columns:
+          - name: order_id
+            data_tests:
+              - unique
+              - not_null
+          - name: customer_id
+            data_tests:
+              - not_null
+      - name: order_items
+        description: "Raw order line items with product and seller"
+        columns:
+          - name: order_id
+            data_tests:
+              - not_null
+          - name: product_id
+            data_tests:
+              - not_null
+      - name: order_payments
+        description: "Raw payment details per order"
+        columns:
+          - name: order_id
+            data_tests:
+              - not_null
+      - name: order_reviews
+        description: "Raw customer reviews per order"
+        columns:
+          - name: review_id
+            data_tests:
+              - not_null
+          - name: order_id
+            data_tests:
+              - not_null
+      - name: products
+        description: "Raw product catalog"
+        columns:
+          - name: product_id
+            data_tests:
+              - unique
+              - not_null
+      - name: sellers
+        description: "Raw seller data"
+        columns:
+          - name: seller_id
+            data_tests:
+              - unique
+              - not_null
+      - name: product_category_name_translation
+        description: "Portuguese to English category translation"
+        columns:
+          - name: product_category_name
+            data_tests:
+              - unique
+              - not_null

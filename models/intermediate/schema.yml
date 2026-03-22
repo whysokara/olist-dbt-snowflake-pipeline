@@ -1,0 +1,53 @@
+version: 2
+
+models:
+  - name: int_orders_with_customers
+    description: "Orders enriched with customer information and delivery metrics"
+    columns:
+      - name: order_id
+        description: "Primary key"
+        data_tests:
+          - unique
+          - not_null
+      - name: customer_id
+        data_tests:
+          - not_null
+      - name: customer_unique_id
+        data_tests:
+          - not_null
+      - name: status
+        data_tests:
+          - not_null
+      - name: is_delivered_on_time
+        data_tests:
+          - not_null
+
+  - name: int_order_items_with_products
+    description: "Order items enriched with product, category and seller info"
+    columns:
+      - name: order_id
+        data_tests:
+          - not_null
+      - name: product_id
+        data_tests:
+          - not_null
+      - name: seller_id
+        data_tests:
+          - not_null
+      - name: price
+        data_tests:
+          - not_null
+      - name: total_item_value
+        data_tests:
+          - not_null
+
+  - name: int_order_payments_pivoted
+    description: "One row per order with payment breakdown by type"
+    columns:
+      - name: order_id
+        data_tests:
+          - unique
+          - not_null
+      - name: total_payment_value
+        data_tests:
+          - not_null
