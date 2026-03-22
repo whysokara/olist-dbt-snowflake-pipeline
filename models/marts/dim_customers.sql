@@ -1,13 +1,13 @@
 with customers as (
-    select distinct
+    select
         customer_unique_id,
-        -- take any one zip/city/state per unique customer
-        max(zip_code_prefix)    as zip_code_prefix,
-        max(city)               as city,
-        max(state)              as state
-    from {{ ref('stg_customers') }}
-    group by customer_unique_id
+        zip_code_prefix,
+        city,
+        state
+    from {{ ref('customers_snapshot') }}
+    where dbt_valid_to is null
 ),
+
 
 orders as (
     select
